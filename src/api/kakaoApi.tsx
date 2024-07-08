@@ -1,6 +1,6 @@
 import API from "../styles/config.tsx";
 import {useEffect} from "react";
-import * as axios from "axios";
+import axios from "axios";
 import {AxiosRequestConfig} from "axios";
 
 const defaultConfig: AxiosRequestConfig = {
@@ -16,11 +16,11 @@ const jsonConfig: AxiosRequestConfig = {
 }
 
 
-const MoveKakaoLogin = () => {
+export const MoveKakaoLogin = () => {
     location.href = API.KAKAO_LOGIN
 }
 
-const KakaoCallBack = () => {
+export const KakaoCallBack = () => {
     useEffect(() => {
         const params = new URL(document.location.toString()).searchParams
         const code = params.get("code")
@@ -45,5 +45,3 @@ const KakaoCallBack = () => {
     }, [])
     return <></>
 }
-
-export default {MoveKakaoLogin, KakaoCallBack}

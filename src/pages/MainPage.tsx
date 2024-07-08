@@ -1,9 +1,11 @@
 import BasicLayout from "../layout/BasicLayout.tsx";
+import TabView from "../components/TabView.tsx";
 
 function MainPage() {
+
     return (
         <BasicLayout>
-            <div className="bg-amber-500">Main Page</div>
+            <TabView/>
         </BasicLayout>
     );
 }

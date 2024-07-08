@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Pretendard-Regular";
+    font-weight: normal;
+    src: url("./styles/font/Pretendard-Regular.ttf") format("truetype");
+}
+
+body {
+    font-family: "Pretendard-Regular", serif;
+}

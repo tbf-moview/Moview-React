@@ -1,9 +1,9 @@
 import {ReactNode} from 'react';
 import Header from "../components/Header.tsx";
 
-function BasicLayout({children}: { children: ReactNode }) {
+function BasicLayout({bgColor, children}: { bgColor: string, children: ReactNode }) {
     return (
-        <main className="bg-gray-100 w-screen h-screen">
+        <main className={"w-screen h-screen " + bgColor}>
             <div className="max-w-7xl mx-auto">
                 <Header/>
                 {children}

@@ -4,9 +4,17 @@ export interface Tab {
     content: string;
 }
 
+export interface ReviewRequest {
+    title: string;
+    tag: string[];
+    contentBlob: string[];
+    imageBlob: File[];
+}
+
 export interface Review {
     title: string;
     content: string;
+    tag: string[];
     nickname: string;
     like: number;
     createdAt: Date;

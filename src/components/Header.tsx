@@ -13,10 +13,11 @@ function Header() {
             </button>
             <div className="flex flex-row justify-between items-center">
                 <button className="w-10 h-10 content-center"
-                onClick={() => location.href = '/review/write'}>
+                        onClick={() => location.href = '/review/write'}>
                     <MdMovieEdit className="text-2xl m-auto"/>
                 </button>
-                <button className="ml-1 w-10 h-10 content-center">
+                <button className="ml-1 w-10 h-10 content-center"
+                        onClick={() => location.href = '/review/search'}>
                     <IoIosSearch className="text-2xl m-auto"/>
                 </button>
                 <div className="ml-2 w-18 h-10 flex items-center justify-center">

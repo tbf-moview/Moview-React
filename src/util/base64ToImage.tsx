@@ -4,7 +4,7 @@ async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
     return new File([blob], fileName, {type: 'image/png'});
 }
 
-export default function stringToImageArray(content: string) {
+export default async function stringToImageArray(content: string) {
     const imageArray = new Array<File>()
     const contentArray = new Array<string>()
 
@@ -16,8 +16,10 @@ export default function stringToImageArray(content: string) {
             if (srcMatch && srcMatch[1]) {
                 const srcValue = srcMatch[1];
                 const dataImageMatch = srcValue.match(/data:image\/(.*?);/);
+                console.log(dataImageMatch)
                 if (dataImageMatch && dataImageMatch[1]) {
-                    dataUrlToFile(srcValue, i + "." + dataImageMatch[1]).then((res) => {
+                    await dataUrlToFile(srcValue, i + "." + dataImageMatch[1]).then((res) => {
+                        console.log(res);
                         imageArray.push(res);
                     })
                 }

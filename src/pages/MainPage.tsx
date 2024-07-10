@@ -4,7 +4,7 @@ import TabView from "../components/TabView.tsx";
 function MainPage() {
 
     return (
-        <BasicLayout>
+        <BasicLayout bgColor="bg-gray-100">
             <TabView/>
         </BasicLayout>
     );

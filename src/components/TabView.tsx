@@ -11,32 +11,29 @@ const tabs = [
 
 const TabView: React.FC = () => {
     const [activeTab, setActiveTab] = useState<number>(tabs[0].id);
-    const [content, setContent] = useState(null);
+    // const [content, setContent] = useState(null);
 
 
     const handleTabClick = (id: number) => {
-
+        console.log(activeTab);
         setActiveTab(id);
     };
 
-    const btnClassNameActive = "transition-all duration-200 mx-4";
-    const btnClassName = "transition-all duration-200 mx-4 text-gray-400";
-
     return (
-        <div>
+        <div className="relative my-5">
             <div>
                 {tabs.map((tab) => (
                     <button
                         key={tab.id}
                         className={tab.id === activeTab
-                            ? 'active' + btnClassNameActive :
-                            btnClassName}
+                            ? "active transition-all duration-200 mx-4" :
+                            "transition-all duration-200 mx-4 text-gray-400"}
                         onClick={() => handleTabClick(tab.id)}
                     >
                         {tab.label}
                     </button>
                 ))}
-                <div className="w-20 start-16 border-black border-b-2"></div>
+                <div className={((activeTab === 1) ? " left-3.5 " : "left-28 ") + "absolute w-20 border-black bg-black h-0.5 transition-all"}></div>
             </div>
             <div className="tab-content">
                 {tabs.map((tab) =>

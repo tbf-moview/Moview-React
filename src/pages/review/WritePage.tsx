@@ -38,7 +38,7 @@ function WritePage() {
     }
 
     const handleSubmit = async () => {
-        const {imageArray, contentArray} = stringToImageArray(content)
+        const {imageArray, contentArray} = await stringToImageArray(content)
         const reviewRequest: ReviewRequest = {
             title: title,
             tag: tag,
@@ -65,9 +65,9 @@ function WritePage() {
                 <div className="relative z-10">
                     <div className="flex flex-row items-center">
                         {tag.map((tag, i) =>
-                            <div key={i}
+                            <button key={i}
                                  className="bg-gray-50 text-emerald-500 px-4 py-1 mx-2 rounded-3xl"
-                                 onClick={(event) => removeTag(event.currentTarget.textContent)}>{tag}</div>)}
+                                 onClick={(event) => removeTag(event.currentTarget.textContent)}>{tag}</button>)}
                         <input className="text-lg my-5 focus:outline-none"
                                type="text" placeholder="태그를 입력하세요" value={tagString}
                                onChange={(event) => tagChange(event.target.value)}

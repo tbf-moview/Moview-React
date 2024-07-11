@@ -1,47 +1,29 @@
 import API from "../styles/config.tsx";
-import {useEffect} from "react";
 import axios from "axios";
 import {AxiosRequestConfig} from "axios";
 
-const defaultConfig: AxiosRequestConfig = {
-    headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-    }
-}
 
 const jsonConfig: AxiosRequestConfig = {
     headers: {
         "Content-Type": "application/json"
-    }
+    },
+    withCredentials: true
 }
-
 
 export const MoveKakaoLogin = () => {
     location.href = API.KAKAO_LOGIN
 }
 
 export const KakaoCallBack = () => {
-    useEffect(() => {
-        const params = new URL(document.location.toString()).searchParams
-        const code = params.get("code")
-
-        axios.post(
-            API.KAKAO_LOGIN_AUTH + `&code=${code}`,
-            {},
-            defaultConfig
-        ).then((res) => {
-            // todo: send json to server
-            axios.post(
-                API.SERVER_LOGIN_KAKAO,
-                res.data,
-                jsonConfig
-            ).then((res) => {
-                console.log(res)
-                location.href = "/"
-            }).catch((err) => {
-                console.log(err)
-            })
-        })
-    }, [])
+    const params = new URL(document.location.toString()).searchParams
+    const code = params.get("code")
+    axios.post(
+        API.SERVER_LOGIN_KAKAO,
+        JSON.stringify({code: code}),
+        jsonConfig
+    ).then((res) => {
+        console.log(res)
+    })
     return <></>
+
 }

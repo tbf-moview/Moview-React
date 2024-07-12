@@ -12,20 +12,18 @@ export default async function stringToImageArray(content: string) {
 
     for (let i = 0; i < parts.length; i++) {
         if (parts[i].startsWith("<img")) {
-            const srcMatch = content.match(/src="([^"]*)"/);
+            const srcMatch = parts[i].match(/src="([^"]*)"/);
             if (srcMatch && srcMatch[1]) {
                 const srcValue = srcMatch[1];
                 const dataImageMatch = srcValue.match(/data:image\/(.*?);/);
-                console.log(dataImageMatch)
                 if (dataImageMatch && dataImageMatch[1]) {
-                    await dataUrlToFile(srcValue, i + "." + dataImageMatch[1]).then((res) => {
-                        console.log(res);
+                    await dataUrlToFile(srcValue, imageArray.length + "." + dataImageMatch[1]).then((res) => {
                         imageArray.push(res);
                     })
                 }
             }
         } else {
-            contentArray.push(content);
+            contentArray.push(parts[i]);
         }
     }
 

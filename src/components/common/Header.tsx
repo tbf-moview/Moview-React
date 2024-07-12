@@ -1,4 +1,4 @@
-import LoginModal from "./LoginModal.tsx";
+import LoginModal from "../LoginModal.tsx";
 import {IoIosSearch} from "react-icons/io";
 import {useState} from "react";
 import {MdMovieEdit} from "react-icons/md";

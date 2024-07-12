@@ -2,7 +2,7 @@ import {lazy, Suspense} from "react";
 import {createBrowserRouter} from "react-router-dom";
 import API from "../styles/config.tsx";
 import {KakaoCallBack} from "../api/kakaoApi.tsx";
-import Loading from "../components/Loading.tsx";
+import Loading from "../components/common/Loading.tsx";
 
 const Main = lazy(() => import('../pages/MainPage'))
 const ReviewWrite = lazy(() => import('../pages/review/WritePage'))

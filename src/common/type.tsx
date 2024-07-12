@@ -12,6 +12,7 @@ export interface ReviewRequest {
 }
 
 export interface Review {
+    id: number;
     title: string;
     content: string;
     tag: string[];

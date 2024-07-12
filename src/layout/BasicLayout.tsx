@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import Header from "../components/Header.tsx";
+import Header from "../components/common/Header.tsx";
 
 function BasicLayout({bgColor, children}: { bgColor: string, children: ReactNode }) {
     return (

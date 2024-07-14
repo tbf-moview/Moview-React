@@ -56,8 +56,8 @@ function WritePage() {
     };
 
     return (
-        <>
-            <div className="mx-12 h-screen">
+        <div className="h-screen max-w-screen-md mx-auto">
+            <div className="h-screen">
                 <input className="text-5xl mt-10 mb-6 focus:outline-none"
                        type="text" placeholder="제목을 입력하세요" value={title}
                        onChange={(event) => setTitle(event.target.value)}/>
@@ -68,7 +68,7 @@ function WritePage() {
                             <button key={i}
                                  className="bg-gray-50 text-emerald-500 px-4 py-1 mx-2 rounded-3xl"
                                  onClick={(event) => removeTag(event.currentTarget.textContent)}>{tag}</button>)}
-                        <input className="text-lg my-5 focus:outline-none"
+                        <input className="text-lg font-normal my-5 focus:outline-none"
                                type="text" placeholder="태그를 입력하세요" value={tagString}
                                onChange={(event) => tagChange(event.target.value)}
                                onFocus={() => setShowTag(true)}
@@ -80,20 +80,16 @@ function WritePage() {
                         <span>등록된 태그를 클릭하면 삭제됩니다.</span>
                     </div>}
                 </div>
-                <div className="h-[calc(100%-180px)] absolutebottom-16 z-0">
+                <div className="h-[calc(100%-248px)] absolutebottom-16 z-0">
                     <Editor
                         apiKey={API.TINYMCE_API_KEY}
                         init={{
                             skin: "borderless",
-                            plugins: 'anchor autolink autoresize charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-                            autoresize: true,
-                            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                            tinycomments_mode: 'embedded',
-                            tinycomments_author: 'Author name',
-                            mergetags_list: [
-                                {value: 'First.Name', title: 'First Name'},
-                                {value: 'Email', title: 'Email'},
-                            ],
+                            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tableofcontents footnotes mergetags autocorrect inlinecss markdown',
+                            autoresize: false,
+                            menubar: false,
+                            statusbar: false,
+                            toolbar: 'undo redo | h1 h2 h3 h4 | bold italic underline strikethrough | align lineheight | checklist numlist bullist indent outdent | blockquote link image code',
                             placeholder: "당신의 이야기를 적어보세요...",
                             file_picker_types: "image",
                         }}
@@ -107,11 +103,11 @@ function WritePage() {
                         onClick={() => navigate(-1)}>
                     <IoMdArrowBack className="ml-8 mr-2"/>나가기
                 </button>
-                <button className="bg-teal-500 text-white font-extrabold mx-4 my-2 px-4 py-2 rounded-l"
+                <button className="bg-teal-500 text-white font-semibold mx-4 my-2 px-4 py-2 rounded-md"
                         onClick={handleSubmit}>출간하기
                 </button>
             </div>
-        </>
+        </div>
     )
         ;
 }

@@ -8,9 +8,9 @@ function IndexTab() {
     const reviewData: Review[] = [
         {
             id: 1,
-            title: "test title111111111111111111111111111111111111111111111111111111111111111111",
+            title: "테스트 제목 test title111111111111111111111111111111111111111111111111111111111111111111",
             content: "<p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p>",
-            tag: ["tag1", "tag2", "tag3"],
+            tag: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10", "tag11"],
             nickname: "username",
             like: 10,
             createdAt: new Date("2024-07-11"),
@@ -51,16 +51,16 @@ function IndexTab() {
     const [activeTabIndex, setActiveTabIndex] = useState<number>(1);
 
     const tabs = [
-        {id: 1, label: <><PiTrendUpFill className="mr-2"/>트랜딩</>, content: reviewData},
+        {id: 1, label: <><PiTrendUpFill className="mr-2"/>트렌딩</>, content: reviewData},
         {id: 2, label: <><LuClock4 className="mr-2"/>최신</>, content: []},
     ];
 
     return (
-        <div className="relative max-w-screen-xl mx-auto">
+        <div className="relative max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
             <div className="flex flex-row">
                 {
                     tabs.map((tab) =>
-                        <button className="flex flex-row justify-between items-center text-lg font-extrabold mt-6 ml-6"
+                        <button className="flex flex-row justify-between items-center text-lg mt-6 ml-6"
                                 key={tab.id}
                                 onClick={() => setActiveTabIndex(tab.id)}>
                             {tab.label}

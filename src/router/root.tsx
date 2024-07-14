@@ -7,6 +7,7 @@ import Loading from "../components/common/Loading.tsx";
 const Main = lazy(() => import('../pages/MainPage'))
 const ReviewWrite = lazy(() => import('../pages/review/WritePage'))
 const ReviewSearch = lazy(() => import('../pages/review/SearchPage'))
+const ReviewDetail = lazy(() => import('../pages/review/DetailPage'))
 
 const root = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const root = createBrowserRouter([
     {
         path: '/review/search',
         element: <Suspense fallback={Loading}><ReviewSearch/></Suspense>
+    },
+    {
+        path: '/review/:id',
+        element: <Suspense fallback={Loading}><ReviewDetail/></Suspense>
     }
 ])
 

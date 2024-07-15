@@ -1,52 +1,12 @@
-import {useState} from 'react';
+import {Fragment, useState} from 'react';
 import {PiTrendUpFill} from "react-icons/pi";
 import {LuClock4} from "react-icons/lu";
 import IndexReviewLayout from "../../layout/IndexReviewLayout.tsx";
+import {reviewData} from "../../common/testData.tsx";
 import {Review} from "../../common/type.tsx";
+import IndexReviewComponent from "../review/IndexReviewComponent.tsx";
 
 function IndexTab() {
-    const reviewData: Review[] = [
-        {
-            id: 1,
-            title: "테스트 제목 test title111111111111111111111111111111111111111111111111111111111111111111",
-            content: "<p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p><p>content</p>",
-            tag: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10", "tag11"],
-            nickname: "username",
-            like: 10,
-            createdAt: new Date("2024-07-11"),
-            modifiedAt: new Date("2024-07-11"),
-        },
-        {
-            id: 2,
-            title: "test title",
-            content: "<p>content</p>",
-            tag: ["tag1", "tag2", "tag3"],
-            nickname: "username",
-            like: 10,
-            createdAt: new Date("2024-07-11"),
-            modifiedAt: new Date("2024-07-11"),
-        },
-        {
-            id: 3,
-            title: "test title",
-            content: "<p>content</p>",
-            tag: ["tag1", "tag2", "tag3"],
-            nickname: "username",
-            like: 10,
-            createdAt: new Date("2024-07-11"),
-            modifiedAt: new Date("2024-07-11"),
-        },
-        {
-            id: 4,
-            title: "test title",
-            content: "<p>content</p>",
-            tag: ["tag1", "tag2", "tag3"],
-            nickname: "username",
-            like: 10,
-            createdAt: new Date("2024-07-11"),
-            modifiedAt: new Date("2024-07-11"),
-        },
-    ]
 
     const [activeTabIndex, setActiveTabIndex] = useState<number>(1);
 
@@ -60,7 +20,8 @@ function IndexTab() {
             <div className="flex flex-row">
                 {
                     tabs.map((tab) =>
-                        <button className="flex flex-row justify-between items-center text-lg mt-6 ml-6"
+                        <button className={"flex flex-row justify-between items-center text-lg mt-6 ml-6" +
+                            (tab.id === activeTabIndex ? " font-semibold text-gray-800" : " font-normal text-gray-400")}
                                 key={tab.id}
                                 onClick={() => setActiveTabIndex(tab.id)}>
                             {tab.label}
@@ -69,12 +30,15 @@ function IndexTab() {
             </div>
             <div
                 className={((activeTabIndex === 1) ? "left-5 " : "left-28 ") + "absolute mt-1.5 w-20 h-0.5 border-black bg-black transition-all"}></div>
-            {
-                tabs.map((tab) =>
-                    (tab.id === activeTabIndex)
-                        ? <IndexReviewLayout reviewData={tab.content} key={tab.id}/>
-                        : null)
-            }
+
+            <IndexReviewLayout>
+                {
+                    tabs.map((tab) =>
+                        <Fragment key={tab.id}>
+                            {tab.content.map((review: Review) => IndexReviewComponent(review))}
+                        </Fragment>)
+                }
+            </IndexReviewLayout>
         </div>
     );
 }

@@ -6,18 +6,28 @@ export interface Tab {
 
 export interface ReviewRequest {
     title: string;
-    tag: string[];
-    contentBlob: string[];
-    imageBlob: File[];
+    tags: string[];
+    texts: string[];
+    images: File[];
 }
 
 export interface Review {
     id: number;
     title: string;
     content: string;
-    tag: string[];
-    nickname: string;
+    member: Member;
     like: number;
-    createdAt: Date;
-    modifiedAt: Date;
+    reviewTags: ReviewTag[];
+    createDate: Date;
+    updateDate: Date;
+}
+
+interface Member {
+    email: string;
+    nickname: string;
+}
+
+export interface ReviewTag {
+    id: number;
+    tag: string;
 }

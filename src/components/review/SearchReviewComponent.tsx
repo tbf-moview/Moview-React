@@ -1,4 +1,4 @@
-import {Review} from "../../common/type.tsx";
+import {Review, ReviewTag} from "../../common/type.tsx";
 import {dateToKorean, getReviewText} from "../../util/reviewParser.tsx";
 import TagComponent from "./TagComponent.tsx";
 import {FaHeart} from "react-icons/fa6";
@@ -17,7 +17,7 @@ function SearchReviewComponent(review: Review) {
                 {getReviewText(review.content)}
             </div>
             <div className="flex flex-row flex-wrap items-center w-full my-2">
-                {review.reviewTags.map((tag, index) => TagComponent({tag, index}))}
+                {review.reviewTags.map((reviewTag: ReviewTag, index: number) => TagComponent({reviewTag, index}))}
             </div>
             <div className="flex flex-row flex-wrap items-center mt-4 text-sm text-gray-400 font-light">
                 {dateToKorean(review.createDate)}

@@ -41,15 +41,20 @@ function WritePage() {
         const {imageArray, contentArray} = await stringToImageArray(content)
         const reviewRequest: ReviewRequest = {
             title: title,
-            tag: tag,
-            contentBlob: contentArray,
-            imageBlob: imageArray
+            tags: tag,
+            texts: contentArray,
+            images: imageArray
         }
         console.log(reviewRequest);
 
         try {
             const response = await postReview(reviewRequest)
-            console.log('서버 응답:', response.data)
+            console.log(response)
+            if (response.status === 201) {
+                location.href = '/'
+            } else {
+                alert('문제가 발생했습니다 다시 시도해주세요')
+            }
         } catch (error) {
             alert('서버 요청 오류: ' + error)
         }

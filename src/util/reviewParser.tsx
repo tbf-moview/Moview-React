@@ -1,5 +1,8 @@
 export const dateToKorean = (date: Date) => {
-    return date.getFullYear() + '년 ' + (date.getMonth() + 1) + '월 ' + date.getDate() + '일';
+    const outputDate = new Date(date);
+    return outputDate.getFullYear() + '년 '
+        + (outputDate.getMonth() + 1) + '월 '
+        + outputDate.getDate() + '일';
 }
 
 export const getReviewText = (content: string) => {

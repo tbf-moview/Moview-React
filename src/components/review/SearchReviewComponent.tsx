@@ -17,13 +17,13 @@ function SearchReviewComponent(review: Review) {
                 {getReviewText(review.content)}
             </div>
             <div className="flex flex-row flex-wrap items-center w-full my-2">
-                {review.reviewTags.map((reviewTag: ReviewTag, index: number) => TagComponent({reviewTag, index}))}
+                {review.reviewTags.map((reviewTag: ReviewTag) => TagComponent({reviewTag}))}
             </div>
             <div className="flex flex-row flex-wrap items-center mt-4 text-sm text-gray-400 font-light">
                 {dateToKorean(review.createDate)}
                 <div className="mx-2">·</div>
                 <FaHeart className="mr-1.5"/>
-                {review.like}
+                {review.likeCount}
             </div>
             <hr className="my-12"/>
         </div>

@@ -4,11 +4,17 @@ import {useState} from "react";
 import {Review} from "../../common/type.tsx";
 import SearchReviewComponent from "../../components/review/SearchReviewComponent.tsx";
 import {reviewData} from "../../common/testData.tsx";
+import {useSearchParams} from "react-router-dom";
 
 function SearchPage() {
 
+    const [searchParams, setSearchParams] = useSearchParams()
     const [searchFocus, setSearchFocus] = useState(false);
-    const [searchText, setSearchText] = useState('');
+
+    const handleSearchParam = (paramStr: string) => {
+        setSearchParams({"param" : paramStr});
+    }
+
 
     return (
         <BasicLayout bgColor="bg-white">
@@ -19,12 +25,12 @@ function SearchPage() {
                     <IoIosSearch className="m-3 md:text-3xl text-2xl"/>
                     <input placeholder="검색어를 입력하세요"
                            className="focus:outline-none w-full"
-                           value={searchText}
-                           onChange={(event) => setSearchText(event.target.value)}
+                           value={searchParams.get("param") || ''}
+                           onChange={(event) => handleSearchParam(event.target.value)}
                            onFocus={() => setSearchFocus(true)}
                            onBlur={() => setSearchFocus(false)}/>
                 </div>
-                {true && <div>
+                {searchParams.get("param") && <div>
                     {reviewData.map((review: Review) => SearchReviewComponent(review))}
                 </div>}
 

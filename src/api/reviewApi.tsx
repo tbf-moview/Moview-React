@@ -1,11 +1,10 @@
 import axios from "axios";
 import API from "../styles/config.tsx";
-import {Review, ReviewRequest} from "../common/type.tsx";
+import {Review, ReviewIndex, ReviewRequest} from "../common/type.tsx";
 
-export const getIndexReview = async ({title, content}: { title: string, content: string }) => {
-    const res = await axios.post(
-        `${API.BASE_URL}/review/list`,
-        {title: title, content: content}
+export const getIndexReview = async (page: number) => {
+    const res = await axios.get<ReviewIndex[]>(
+        `${API.BASE_URL}/reviews/${page}`,
     );
     return res.data;
 }
@@ -24,9 +23,8 @@ export const postReview = async (reviewRequest: ReviewRequest) => {
     reviewRequest.texts.forEach((text) => formData.append("texts", text));
     reviewRequest.images.forEach((image) => formData.append("images", image));
 
-    const res = await axios.post(
+    return await axios.post(
         `${API.BASE_URL}/review`,
         formData,
     );
-    return res.data;
 }

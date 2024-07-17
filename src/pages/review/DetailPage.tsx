@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {Review, ReviewTag} from "../../common/type.tsx";
 import {getReview} from "../../api/reviewApi.tsx";
 import {useParams} from "react-router-dom";
+import {FaHeart} from "react-icons/fa6";
 
 function DetailPage() {
 
@@ -21,7 +22,7 @@ function DetailPage() {
             email: "",
             nickname: ""
         },
-        like: 0,
+        likeCount: 0,
         createDate: new Date("2024-07-11"),
         updateDate: new Date("2024-07-11"),
     }
@@ -30,6 +31,7 @@ function DetailPage() {
 
     useEffect(() => {
         getReview(reviewId).then((data) => {
+            data.reviewTags = data.reviewTags.sort((a, b) => a.tag.toLowerCase() < b.tag.toLowerCase() ? -1 : 1)
             setReview(data);
         })
     }, [reviewId])
@@ -54,17 +56,27 @@ function DetailPage() {
                                 {dateToKorean(review.createDate)}
                             </div>
                         </div>
-                        <button className="border border-emerald-500 text-emerald-500 px-[26px] py-[3px] rounded-2xl">
-                            팔로우
-                        </button>
+                        <div className="flex flex-row justify-between items-center">
+                            <button
+                                className="border border-emerald-500 text-emerald-500 px-6 py-0.5 mr-2 rounded-2xl">
+                                팔로우
+                            </button>
+                            <button
+                                className="flex flex-row justify-between items-center border border-gray-400 text-gray-400 px-6 py-0.5 rounded-2xl"
+                            >
+                                <FaHeart className="mr-3"/>
+                                {review.likeCount}
+                            </button>
+                        </div>
                     </div>
                     <div className="flex flex-row flex-wrap items-center w-full mt-2">
-                        {review.reviewTags.map((reviewTag: ReviewTag, index: number) => (
-                            <TagComponent reviewTag={reviewTag} index={index} />
+                        {review.reviewTags.map((reviewTag: ReviewTag) => (
+                            <TagComponent key={reviewTag.id} reviewTag={reviewTag}/>
                         ))}
                     </div>
                 </div>
-                <div dangerouslySetInnerHTML={{__html: safeContent}}/>
+                <div className="w-full inline-block break-words text-wrap"
+                     dangerouslySetInnerHTML={{__html: safeContent}}/>
                 <div className="mt-12 mb-6 flex flex-row justify-between items-center w-full">
                     <div className="flex flex-row">
                         <div className="text-gray-400 mr-2">by</div>

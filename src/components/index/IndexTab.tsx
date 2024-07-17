@@ -1,14 +1,36 @@
-import {Fragment, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {PiTrendUpFill} from "react-icons/pi";
 import {LuClock4} from "react-icons/lu";
-import IndexReviewLayout from "../../layout/IndexReviewLayout.tsx";
-import {reviewData} from "../../common/testData.tsx";
-import {Review} from "../../common/type.tsx";
+import {ReviewIndex} from "../../common/type.tsx";
 import IndexReviewComponent from "../review/IndexReviewComponent.tsx";
+import {getIndexReview} from "../../api/reviewApi.tsx";
+import useInfiniteScroll from "../../util/useInfiniteScroll.tsx";
+import Loading from "../common/Loading.tsx";
 
 function IndexTab() {
 
     const [activeTabIndex, setActiveTabIndex] = useState<number>(1);
+
+    const [reviewData, setReviewData] = useState<ReviewIndex[]>([]);
+
+    const target = useRef<HTMLDivElement>(null)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const {page} = useInfiniteScroll({
+        target: target,
+        targetArray: reviewData,
+        threshold: 0.2,
+        endPoint: 8
+    })
+
+    useEffect(() => {
+        console.log(page)
+        setIsLoading(true);
+
+        getIndexReview(page).then((data) => {
+            setReviewData([...reviewData, ...data]);
+            setIsLoading(false)
+        })
+    }, [page]);
 
     const tabs = [
         {id: 1, label: <><PiTrendUpFill className="mr-2"/>트렌딩</>, content: reviewData},
@@ -16,30 +38,28 @@ function IndexTab() {
     ];
 
     return (
-        <div className="relative max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
-            <div className="flex flex-row">
-                {
-                    tabs.map((tab) =>
-                        <button className={"flex flex-row justify-between items-center text-lg mt-6 ml-6" +
-                            (tab.id === activeTabIndex ? " font-semibold text-gray-800" : " font-normal text-gray-400")}
-                                key={tab.id}
-                                onClick={() => setActiveTabIndex(tab.id)}>
-                            {tab.label}
-                        </button>)
-                }
-            </div>
-            <div
-                className={((activeTabIndex === 1) ? "left-5 " : "left-28 ") + "absolute mt-1.5 w-20 h-0.5 border-black bg-black transition-all"}></div>
+        <>
+            <div className="relative max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
+                <div className="flex flex-row">
+                    {
+                        tabs.map((tab) =>
+                            <button className={"flex flex-row justify-between items-center text-lg mt-6 ml-6" +
+                                (tab.id === activeTabIndex ? " font-semibold text-gray-800" : " font-normal text-gray-400")}
+                                    key={tab.id}
+                                    onClick={() => setActiveTabIndex(tab.id)}>
+                                {tab.label}
+                            </button>)
+                    }
+                </div>
+                <div
+                    className={((activeTabIndex === 1) ? "left-5 " : "left-28 ") + "absolute mt-1.5 w-20 h-0.5 border-black bg-black transition-all"}></div>
 
-            <IndexReviewLayout>
-                {
-                    tabs.map((tab) =>
-                        <Fragment key={tab.id}>
-                            {tab.content.map((review: Review) => IndexReviewComponent(review))}
-                        </Fragment>)
-                }
-            </IndexReviewLayout>
-        </div>
+                <div ref={target} className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-12 mx-1.5">
+                    {reviewData.map((review: ReviewIndex) => IndexReviewComponent(review))}
+                </div>
+                {isLoading && <div>${Loading}</div>}
+            </div>
+        </>
     );
 }
 

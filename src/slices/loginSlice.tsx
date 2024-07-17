@@ -1,10 +1,10 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 const initState = {
     email: ''
 }
 
-export const loginPostAsync = createAsyncThunk('loginPostAsync', (param) => (param))
+// export const loginPostAsync = createAsyncThunk('loginPostAsync', (param) => (param))
 
 const loginSlice = createSlice({
     name: "loginSlice",
@@ -19,18 +19,18 @@ const loginSlice = createSlice({
             return {...initState}
         }
     },
-    extraReducers: (builder) => {
-        builder
-            .addCase(loginPostAsync.fulfilled, (state, action) => {
-                return {email: action.payload.email}
-            })
-            .addCase(loginPostAsync.pending, (state, action) => {
-
-            })
-            .addCase(loginPostAsync.rejected, (state, action) => {
-
-            })
-    }
+    // extraReducers: (builder) => {
+    //     builder
+    //         .addCase(loginPostAsync.fulfilled, (state, action) => {
+    //             return {email: action.payload.email}
+    //         })
+    //         .addCase(loginPostAsync.pending, (state, action) => {
+    //
+    //         })
+    //         .addCase(loginPostAsync.rejected, (state, action) => {
+    //
+    //         })
+    // }
 })
 
 export const {login, logout} = loginSlice.actions;

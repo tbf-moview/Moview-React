@@ -49,12 +49,14 @@ function WritePage() {
 
         try {
             const response = await postReview(reviewRequest)
-            console.log(response)
+
             if (response.status === 201) {
+                alert('작성 완료되었습니다')
                 location.href = '/'
             } else {
                 alert('문제가 발생했습니다 다시 시도해주세요')
             }
+
         } catch (error) {
             alert('서버 요청 오류: ' + error)
         }

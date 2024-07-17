@@ -1,12 +1,12 @@
-import {Review} from "../../common/type.tsx";
+import {ReviewIndex} from "../../common/type.tsx";
 import {dateToKorean, getFirstReviewImage, getReviewText} from "../../util/reviewParser.tsx";
 import {FaHeart} from "react-icons/fa6";
 
-function IndexReviewComponent(review: Review) {
+function IndexReviewComponent(review: ReviewIndex) {
 
     return (
         <div key={review.id}
-             className="h-96 w-full lg:w-[304px] 2xl:w-[360px] mx-auto bg-white px-3 shadow-md hover:-translate-y-2 hover:shadow-lg ease-in duration-200 transition rounded"
+             className="h-96 w-full lg:w-[304px] mx-auto bg-white px-3 shadow-md hover:-translate-y-2 hover:shadow-lg ease-in duration-200 transition rounded"
              onClick={() => location.href = `/review/${review.id}`}>
             <div className="h-[304px] mb-2">
                 {(getFirstReviewImage(review.content)) &&
@@ -26,9 +26,9 @@ function IndexReviewComponent(review: Review) {
             <div className="h-12 flex flex-row justify-between items-center">
                 <div className="text-xs font-semibold text-gray-800">
                     <span className="text-gray-400 font-light mr-1.5">by</span>
-                    {review.member.nickname}</div>
+                    {review.nickname}</div>
                 <div className="flex flex-row justify-between items-center text-xs font-light">
-                    <FaHeart className="mr-2"/>{review.like}
+                    <FaHeart className="mr-2"/>{review.likeCount}
                 </div>
             </div>
         </div>

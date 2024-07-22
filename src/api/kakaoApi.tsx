@@ -1,13 +1,13 @@
 import API from "../styles/config.tsx";
 import axios from "axios";
 import {AxiosRequestConfig} from "axios";
+import axiosCookie from "../common/axiosCookie.tsx";
 
 
 const jsonConfig: AxiosRequestConfig = {
     headers: {
         "Content-Type": "application/json"
     },
-    withCredentials: true
 }
 
 export const MoveKakaoLogin = () => {
@@ -28,4 +28,8 @@ export const KakaoCallBack = () => {
     })
     return <></>
 
+}
+
+export const sendCookie = async () => {
+    return await axiosCookie.get(`${API.BASE_URL}/token/test`)
 }

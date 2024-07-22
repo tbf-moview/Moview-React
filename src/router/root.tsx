@@ -1,13 +1,9 @@
-import {lazy, Suspense} from "react";
+import {Suspense} from "react";
 import {createBrowserRouter} from "react-router-dom";
 import API from "../styles/config.tsx";
 import {KakaoCallBack} from "../api/kakaoApi.tsx";
 import Loading from "../components/common/Loading.tsx";
-
-const Main = lazy(() => import('../pages/MainPage'))
-const ReviewWrite = lazy(() => import('../pages/review/WritePage'))
-const ReviewSearch = lazy(() => import('../pages/review/SearchPage'))
-const ReviewDetail = lazy(() => import('../pages/review/DetailPage'))
+import {Main, ReviewDetail, ReviewFollow, ReviewMy, ReviewSearch, ReviewWrite, Setting} from "./pages.tsx";
 
 const root = createBrowserRouter([
     {
@@ -29,7 +25,19 @@ const root = createBrowserRouter([
     {
         path: '/review/:id',
         element: <Suspense fallback={Loading}><ReviewDetail/></Suspense>
-    }
+    },
+    {
+        path: '/review/my',
+        element: <Suspense fallback={Loading}><ReviewMy/></Suspense>
+    },
+    {
+        path: '/review/follow',
+        element: <Suspense fallback={Loading}><ReviewFollow/></Suspense>
+    },
+    {
+        path: '/setting',
+        element: <Suspense fallback={Loading}><Setting/></Suspense>
+    },
 ])
 
 export default root;

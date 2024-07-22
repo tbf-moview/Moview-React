@@ -5,9 +5,9 @@ import {FaHeart} from "react-icons/fa6";
 function IndexReviewComponent(review: ReviewIndex) {
 
     return (
-        <div key={review.id}
-             className="h-96 w-full lg:w-[304px] mx-auto bg-white px-3 shadow-md hover:-translate-y-2 hover:shadow-lg ease-in duration-200 transition rounded"
-             onClick={() => location.href = `/review/${review.id}`}>
+        <a key={review.id}
+           className="h-96 w-full lg:w-[304px] mx-auto bg-white px-3 shadow-md hover:-translate-y-2 hover:shadow-lg ease-in duration-200 transition rounded"
+           href={`/review/${review.id}`}>
             <div className="h-[304px] mb-2">
                 {(getFirstReviewImage(review.content)) &&
                     <img className="h-52 object-cover mx-auto"
@@ -31,7 +31,7 @@ function IndexReviewComponent(review: ReviewIndex) {
                     <FaHeart className="mr-2"/>{review.likeCount}
                 </div>
             </div>
-        </div>
+        </a>
     );
 }
 

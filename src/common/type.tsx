@@ -1,9 +1,9 @@
-import {MutableRefObject} from "react";
+import {MutableRefObject, ReactElement} from "react";
 
 export interface Tab {
     id: number;
-    label: Element;
-    content: string;
+    label: ReactElement;
+    content: ReviewIndex[];
 }
 
 export interface ReviewRequest {
@@ -19,6 +19,7 @@ export interface Review {
     content: string;
     member: Member;
     likeCount: number;
+    likeSign: boolean;
     reviewTags: ReviewTag[];
     createDate: Date;
     updateDate: Date;

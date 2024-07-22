@@ -28,3 +28,9 @@ export const postReview = async (reviewRequest: ReviewRequest) => {
         formData,
     );
 }
+
+export const likeReview = async (id: number) => {
+    return await axios.put(
+        `${API.BASE_URL}/review/${id}/like`
+    );
+}

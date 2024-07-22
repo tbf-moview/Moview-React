@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import {PiTrendUpFill} from "react-icons/pi";
 import {LuClock4} from "react-icons/lu";
-import {ReviewIndex} from "../../common/type.tsx";
+import {ReviewIndex, Tab} from "../../common/type.tsx";
 import IndexReviewComponent from "../review/IndexReviewComponent.tsx";
 import {getIndexReview} from "../../api/reviewApi.tsx";
 import useInfiniteScroll from "../../util/useInfiniteScroll.tsx";
@@ -19,11 +19,10 @@ function IndexTab() {
         target: target,
         targetArray: reviewData,
         threshold: 0.2,
-        endPoint: 8
+        endPoint: 2,
     })
 
     useEffect(() => {
-        console.log(page)
         setIsLoading(true);
 
         getIndexReview(page).then((data) => {
@@ -32,7 +31,7 @@ function IndexTab() {
         })
     }, [page]);
 
-    const tabs = [
+    const tabs: Tab[] = [
         {id: 1, label: <><PiTrendUpFill className="mr-2"/>트렌딩</>, content: reviewData},
         {id: 2, label: <><LuClock4 className="mr-2"/>최신</>, content: []},
     ];
@@ -57,7 +56,7 @@ function IndexTab() {
                 <div ref={target} className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-12 mx-1.5">
                     {reviewData.map((review: ReviewIndex) => IndexReviewComponent(review))}
                 </div>
-                {isLoading && <div>${Loading}</div>}
+                {isLoading && <div>{Loading}</div>}
             </div>
         </>
     );

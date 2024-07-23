@@ -76,6 +76,11 @@ function DetailPage() {
                         </div>
                         <div className="flex flex-row justify-between items-center">
                             <button
+                                className="border border-emerald-500 text-emerald-500 px-6 py-0.5 mr-2 rounded-2xl"
+                                onClick={() => location.href = `/review/edit/${review.id}`}>
+                                수정하기
+                            </button>
+                            <button
                                 className="border border-emerald-500 text-emerald-500 px-6 py-0.5 mr-2 rounded-2xl">
                                 팔로우
                             </button>

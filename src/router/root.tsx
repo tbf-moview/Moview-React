@@ -3,7 +3,7 @@ import {createBrowserRouter} from "react-router-dom";
 import API from "../styles/config.tsx";
 import {KakaoCallBack} from "../api/kakaoApi.tsx";
 import Loading from "../components/common/Loading.tsx";
-import {Main, ReviewDetail, ReviewFollow, ReviewMy, ReviewSearch, ReviewWrite, Setting} from "./pages.tsx";
+import {Main, ReviewDetail, ReviewEdit, ReviewFollow, ReviewMy, ReviewSearch, ReviewWrite, Setting} from "./pages.tsx";
 
 const root = createBrowserRouter([
     {
@@ -17,6 +17,10 @@ const root = createBrowserRouter([
     {
         path: '/review/write',
         element: <Suspense fallback={Loading}><ReviewWrite/></Suspense>
+    },
+    {
+        path: '/review/edit/:id',
+        element: <Suspense fallback={Loading}><ReviewEdit/></Suspense>
     },
     {
         path: '/review/search',

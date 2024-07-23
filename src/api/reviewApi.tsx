@@ -1,6 +1,7 @@
 import axios from "axios";
 import API from "../styles/config.tsx";
 import {Review, ReviewIndex, ReviewRequest} from "../common/type.tsx";
+import {getReviewFormData} from "../util/reviewParser.tsx";
 
 export const getIndexReview = async (page: number) => {
     const res = await axios.get<ReviewIndex[]>(
@@ -17,14 +18,17 @@ export const getReview = async (id: number) => {
 }
 
 export const postReview = async (reviewRequest: ReviewRequest) => {
-    const formData = new FormData();
-    formData.append("title", reviewRequest.title);
-    reviewRequest.tags.forEach((tag) => formData.append("tags", tag));
-    reviewRequest.texts.forEach((text) => formData.append("texts", text));
-    reviewRequest.images.forEach((image) => formData.append("images", image));
-
+    const formData = getReviewFormData(reviewRequest);
     return await axios.post(
         `${API.BASE_URL}/review`,
+        formData,
+    );
+}
+
+export const postEditReview = async (id: number, reviewRequest: ReviewRequest) => {
+    const formData = getReviewFormData(reviewRequest);
+    return await axios.put(
+        `${API.BASE_URL}/review/${id}`,
         formData,
     );
 }

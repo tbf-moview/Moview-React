@@ -1,15 +1,15 @@
-import {useState} from 'react';
-import {postReview} from "../../api/reviewApi.tsx";
+import {useEffect, useState} from 'react';
+import {getReview, postEditReview} from "../../api/reviewApi.tsx";
 import {IoMdArrowBack} from "react-icons/io";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import stringToImageArray from "../../util/base64ToImage.tsx";
-import {ReviewRequest} from "../../common/type.tsx";
+import {Review, ReviewRequest, ReviewTag} from "../../common/type.tsx";
 import ReviewWriteTitle from "../../components/review/ReviewWriteTitle.tsx";
 import ReviewWriteTag from "../../components/review/ReviewWriteTag.tsx";
 import ReviewWriteContent from "../../components/review/ReviewWriteContent.tsx";
 
 
-function WritePage() {
+function EditPage() {
     const [title, setTitle] = useState('');
     const [tag, setTag] = useState<string[]>([]);
     const [tagString, setTagString] = useState('');
@@ -18,6 +18,9 @@ function WritePage() {
     const [showTag, setShowTag] = useState<boolean>(false);
 
     const navigate = useNavigate();
+
+    const {id} = useParams();
+    const reviewId = parseInt(id || "");
 
     const tagChange = (tagInputValue: string) => {
         if (tagInputValue.includes(",")) {
@@ -49,11 +52,11 @@ function WritePage() {
         console.log(reviewRequest);
 
         try {
-            const response = await postReview(reviewRequest)
+            const response = await postEditReview(reviewId, reviewRequest);
 
-            if (response.status === 201) {
-                alert('작성 완료되었습니다')
-                location.href = '/'
+            if (response.status === 200) {
+                alert('수정 완료되었습니다')
+                location.replace('/')
             } else {
                 alert('문제가 발생했습니다 다시 시도해주세요')
             }
@@ -62,6 +65,23 @@ function WritePage() {
             alert('서버 요청 오류: ' + error)
         }
     };
+
+    useEffect(() => {
+        getReview(reviewId).then((review: Review) => {
+            setTitle(review.title);
+
+            const tagArray: string[] = [];
+            review.reviewTags.map((reviewTag: ReviewTag) => {
+                tagArray.push(reviewTag.tag);
+            })
+            tagArray.sort();
+            setTag(tagArray);
+
+            console.log(review.content);
+            setContent(review.content);
+
+        })
+    }, [setTag, reviewId]);
 
     return (
         <div className="h-screen max-w-screen-md mx-auto">
@@ -78,7 +98,7 @@ function WritePage() {
                     <IoMdArrowBack className="ml-8 mr-2"/>나가기
                 </button>
                 <button className="bg-teal-500 text-white font-semibold mx-4 my-2 px-4 py-2 rounded-md"
-                        onClick={handleSubmit}>출간하기
+                        onClick={handleSubmit}>수정하기
                 </button>
             </div>
         </div>
@@ -86,4 +106,4 @@ function WritePage() {
         ;
 }
 
-export default WritePage;
+export default EditPage;

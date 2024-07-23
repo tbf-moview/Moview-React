@@ -92,10 +92,11 @@ function WritePage() {
                         apiKey={API.TINYMCE_API_KEY}
                         init={{
                             skin: "borderless",
-                            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tableofcontents footnotes mergetags autocorrect inlinecss markdown',
+                            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
                             autoresize: false,
                             menubar: false,
                             statusbar: false,
+                            inline_boundaries: false,
                             toolbar: 'undo redo | h1 h2 h3 h4 | bold italic underline strikethrough | align lineheight | checklist numlist bullist indent outdent | blockquote link image code',
                             placeholder: "당신의 이야기를 적어보세요...",
                             file_picker_types: "image",

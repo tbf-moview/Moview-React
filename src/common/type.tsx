@@ -14,7 +14,7 @@ export interface ReviewRequest {
 }
 
 export interface Review {
-    id: number;
+    id: string;
     title: string;
     content: string;
     member: Member;
@@ -26,7 +26,7 @@ export interface Review {
 }
 
 export interface ReviewIndex {
-    id: number;
+    id: string;
     title: string;
     content: string;
     email: string;

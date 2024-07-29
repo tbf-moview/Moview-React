@@ -2,7 +2,7 @@ import LoginModal from "../LoginModal.tsx";
 import {IoIosSearch} from "react-icons/io";
 import {useState} from "react";
 import {MdArrowDropDown} from "react-icons/md";
-import {sendCookie} from "../../api/kakaoApi.tsx";
+import {sendCookie} from "../../api/loginApi.tsx";
 
 function Header() {
 

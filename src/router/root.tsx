@@ -1,7 +1,7 @@
 import {Suspense} from "react";
 import {createBrowserRouter} from "react-router-dom";
 import API from "../styles/config.tsx";
-import {KakaoCallBack} from "../api/kakaoApi.tsx";
+import {KakaoCallBack, SignUpCallBack} from "../api/loginApi.tsx";
 import Loading from "../components/common/Loading.tsx";
 import {Main, ReviewDetail, ReviewEdit, ReviewFollow, ReviewMy, ReviewSearch, ReviewWrite, Setting} from "./pages.tsx";
 
@@ -13,6 +13,10 @@ const root = createBrowserRouter([
     {
         path: API.KAKAO_REDIRECT_PATH,
         element: <Suspense fallback={Loading}><KakaoCallBack/></Suspense>
+    },
+    {
+        path: API.SIGNUP_REDIRECT_URI,
+        element: <Suspense fallback={Loading}><SignUpCallBack/></Suspense>
     },
     {
         path: '/review/write',

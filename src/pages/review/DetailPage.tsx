@@ -11,7 +11,7 @@ import {FaHeart} from "react-icons/fa6";
 function DetailPage() {
 
     const {id} = useParams();
-    const reviewId = parseInt(id || "");
+    const reviewId = id || "";
 
     const initState: Review = {
         id: reviewId,

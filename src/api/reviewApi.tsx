@@ -10,7 +10,7 @@ export const getIndexReview = async (page: number) => {
     return res.data;
 }
 
-export const getReview = async (id: number) => {
+export const getReview = async (id: string) => {
     const res = await axios.get<Review>(
         `${API.BASE_URL}/review/${id}`,
     );
@@ -25,7 +25,7 @@ export const postReview = async (reviewRequest: ReviewRequest) => {
     );
 }
 
-export const postEditReview = async (id: number, reviewRequest: ReviewRequest) => {
+export const postEditReview = async (id: string, reviewRequest: ReviewRequest) => {
     const formData = getReviewFormData(reviewRequest);
     return await axios.put(
         `${API.BASE_URL}/review/${id}`,
@@ -33,7 +33,7 @@ export const postEditReview = async (id: number, reviewRequest: ReviewRequest) =
     );
 }
 
-export const likeReview = async (id: number) => {
+export const likeReview = async (id: string) => {
     return await axios.put(
         `${API.BASE_URL}/review/${id}/like`
     );

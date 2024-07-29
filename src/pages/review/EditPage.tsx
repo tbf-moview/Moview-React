@@ -20,7 +20,7 @@ function EditPage() {
     const navigate = useNavigate();
 
     const {id} = useParams();
-    const reviewId = parseInt(id || "");
+    const reviewId = id || "";
 
     const tagChange = (tagInputValue: string) => {
         if (tagInputValue.includes(",")) {

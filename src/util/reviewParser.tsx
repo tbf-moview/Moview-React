@@ -1,4 +1,4 @@
-import {ReviewRequest} from "../common/type.tsx";
+import {ReviewRequest} from "../common/types/reviewType.tsx";
 
 export const dateToKorean = (date: Date) => {
     const outputDate = new Date(date);

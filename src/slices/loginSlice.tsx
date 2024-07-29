@@ -1,7 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {deleteCookie} from "../util/cookieUtil.tsx";
 
-const initState = {
-    email: ''
+interface memberState {
+    isLogin: boolean;
+}
+
+const initState: memberState = {
+    isLogin: false
 }
 
 // export const loginPostAsync = createAsyncThunk('loginPostAsync', (param) => (param))
@@ -12,10 +17,14 @@ const loginSlice = createSlice({
     reducers: {
         login: (_state, action) => {
             console.log('login')
-            return {email: action.payload.email}
+            return {
+                isLogin: action.payload.isLogin
+            }
         },
         logout: () => {
             console.log('logout')
+            deleteCookie('accessToken')
+            deleteCookie('refreshToken')
             return {...initState}
         }
     },

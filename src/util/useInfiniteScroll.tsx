@@ -1,5 +1,5 @@
 import {useEffect, useState, useMemo, useRef} from 'react';
-import {InfiniteScrollProps} from "../common/type.tsx";
+import {InfiniteScrollProps} from "../common/types/pageType.tsx";
 
 const useInfiniteScroll = ({
                                root = null,

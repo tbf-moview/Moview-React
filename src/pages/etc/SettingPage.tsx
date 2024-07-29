@@ -1,8 +1,10 @@
+import BasicLayout from "../../layout/BasicLayout.tsx";
+
 function SettingPage() {
     return (
-        <div>
-            Setting Page
-        </div>
+        <BasicLayout bgColor={"bg-white"}>
+            <div>test</div>
+        </BasicLayout>
     );
 }
 

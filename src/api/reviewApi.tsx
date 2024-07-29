@@ -1,6 +1,6 @@
 import axios from "axios";
 import API from "../styles/config.tsx";
-import {Review, ReviewIndex, ReviewRequest} from "../common/type.tsx";
+import {Review, ReviewIndex, ReviewRequest} from "../common/types/reviewType.tsx";
 import {getReviewFormData} from "../util/reviewParser.tsx";
 
 export const getIndexReview = async (page: number) => {

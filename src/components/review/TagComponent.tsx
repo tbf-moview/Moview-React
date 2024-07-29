@@ -1,11 +1,11 @@
-import {ReviewTag} from "../../common/type.tsx";
+import {ReviewTag} from "../../common/types/reviewType.tsx";
+import {Link} from "react-router-dom";
 
 function TagComponent({reviewTag}: {reviewTag: ReviewTag}) {
     return (
-        <button
+        <Link to={`/review/search?param=${reviewTag.tag}`}
                 className="bg-gray-50 text-emerald-500 px-4 py-1 mx-2 my-2 rounded-3xl hover:opacity-70"
-                onClick={() => location.href = `/review/search?param=${reviewTag.tag}`}
-        >{reviewTag.tag}</button>
+        >{reviewTag.tag}</Link>
     );
 }
 

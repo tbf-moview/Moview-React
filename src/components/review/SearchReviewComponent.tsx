@@ -1,7 +1,8 @@
-import {Review, ReviewTag} from "../../common/type.tsx";
+import {Review, ReviewTag} from "../../common/types/reviewType.tsx";
 import {dateToKorean, getReviewText} from "../../util/reviewParser.tsx";
 import TagComponent from "./TagComponent.tsx";
 import {FaHeart} from "react-icons/fa6";
+import {Link} from "react-router-dom";
 
 function SearchReviewComponent(review: Review) {
 
@@ -10,9 +11,10 @@ function SearchReviewComponent(review: Review) {
             <div className="my-4 font-semibold">
                 {review.member.nickname}
             </div>
-            <div className="text-2xl overflow-hidden break-words font-semibold hover:cursor-pointer" onClick={() => location.href = `/review/${review.id}`}>
+            <Link to={`/review/${review.id}`}
+                className="text-2xl overflow-hidden break-words font-semibold" >
                 {review.title}
-            </div>
+            </Link>
             <div className="w-full h-6 mt-2 mb-4 line-clamp-1 overflow-hidden break-words text-gray-500">
                 {getReviewText(review.content)}
             </div>

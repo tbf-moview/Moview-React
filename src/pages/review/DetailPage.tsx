@@ -3,12 +3,14 @@ import DOMPurify from "dompurify";
 import {dateToKorean} from "../../util/reviewParser.tsx";
 import TagComponent from "../../components/review/TagComponent.tsx";
 import {useEffect, useState} from "react";
-import {Review, ReviewTag} from "../../common/type.tsx";
+import {Review, ReviewTag} from "../../common/types/reviewType.tsx";
 import {getReview, likeReview} from "../../api/reviewApi.tsx";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {FaHeart} from "react-icons/fa6";
 
 function DetailPage() {
+
+    const navigate = useNavigate();
 
     const {id} = useParams();
     const reviewId = id || "";
@@ -77,7 +79,7 @@ function DetailPage() {
                         <div className="flex flex-row justify-between items-center">
                             <button
                                 className="border border-emerald-500 text-emerald-500 px-6 py-0.5 mr-2 rounded-2xl"
-                                onClick={() => location.href = `/review/edit/${review.id}`}>
+                                onClick={() => navigate(`/review/edit/${reviewId}`) }>
                                 수정하기
                             </button>
                             <button

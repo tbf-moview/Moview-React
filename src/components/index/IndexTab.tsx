@@ -1,13 +1,17 @@
 import {useEffect, useRef, useState} from 'react';
 import {PiTrendUpFill} from "react-icons/pi";
 import {LuClock4} from "react-icons/lu";
-import {ReviewIndex, Tab} from "../../common/type.tsx";
+import {ReviewIndex} from "../../common/types/reviewType.tsx";
 import IndexReviewComponent from "../review/IndexReviewComponent.tsx";
 import {getIndexReview} from "../../api/reviewApi.tsx";
 import useInfiniteScroll from "../../util/useInfiniteScroll.tsx";
 import Loading from "../common/Loading.tsx";
+import {Tab} from "../../common/types/pageType.tsx";
+import {useNavigate} from "react-router-dom";
 
 function IndexTab() {
+
+    const navigate = useNavigate();
 
     const [activeTabIndex, setActiveTabIndex] = useState<number>(1);
 
@@ -54,7 +58,7 @@ function IndexTab() {
                     className={((activeTabIndex === 1) ? "left-5 " : "left-28 ") + "absolute mt-1.5 w-20 h-0.5 border-black bg-black transition-all"}></div>
 
                 <div ref={target} className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-12 mx-1.5">
-                    {reviewData.map((review: ReviewIndex) => IndexReviewComponent(review))}
+                    {reviewData.map((review: ReviewIndex) => IndexReviewComponent(review, navigate))}
                 </div>
                 {isLoading && <div>{Loading}</div>}
             </div>

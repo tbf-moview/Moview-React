@@ -3,9 +3,9 @@ import root from "./router/root.tsx";
 
 function App() {
 
-  return (
-    <RouterProvider router={root}/>
-  )
+    return (
+        <RouterProvider router={root}/>
+    )
 }
 
 export default App

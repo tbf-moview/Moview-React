@@ -1,13 +1,14 @@
-import {ReviewIndex} from "../../common/type.tsx";
+import {ReviewIndex} from "../../common/types/reviewType.tsx";
 import {dateToKorean, getFirstReviewImage, getReviewText} from "../../util/reviewParser.tsx";
 import {FaHeart} from "react-icons/fa6";
+import {NavigateFunction} from "react-router-dom";
 
-function IndexReviewComponent(review: ReviewIndex) {
+function IndexReviewComponent(review: ReviewIndex, moveToPath: NavigateFunction) {
 
     return (
         <a key={review.id}
            className="h-96 w-full lg:w-[304px] mx-auto bg-white px-3 shadow-md hover:-translate-y-2 hover:shadow-lg ease-in duration-200 transition rounded"
-           href={`/review/${review.id}`}>
+           onClick={() => {moveToPath(`/review/${review.id}`)}}>
             <div className="h-[304px] mb-2">
                 {(getFirstReviewImage(review.content)) &&
                     <img className="h-52 object-cover mx-auto"

@@ -3,7 +3,7 @@ import {getReview, postEditReview} from "../../api/reviewApi.tsx";
 import {IoMdArrowBack} from "react-icons/io";
 import {useNavigate, useParams} from "react-router-dom";
 import stringToImageArray from "../../util/base64ToImage.tsx";
-import {Review, ReviewRequest, ReviewTag} from "../../common/type.tsx";
+import {Review, ReviewRequest, ReviewTag} from "../../common/types/reviewType.tsx";
 import ReviewWriteTitle from "../../components/review/ReviewWriteTitle.tsx";
 import ReviewWriteTag from "../../components/review/ReviewWriteTag.tsx";
 import ReviewWriteContent from "../../components/review/ReviewWriteContent.tsx";
@@ -42,6 +42,8 @@ function EditPage() {
     }
 
     const handleSubmit = async () => {
+        const navigate = useNavigate()
+
         const {imageArray, contentArray} = await stringToImageArray(content)
         const reviewRequest: ReviewRequest = {
             title: title,
@@ -56,7 +58,7 @@ function EditPage() {
 
             if (response.status === 200) {
                 alert('수정 완료되었습니다')
-                location.replace('/')
+                navigate({pathname: '/'}, {replace: true})
             } else {
                 alert('문제가 발생했습니다 다시 시도해주세요')
             }

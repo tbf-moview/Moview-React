@@ -3,7 +3,7 @@ import {postReview} from "../../api/reviewApi.tsx";
 import {IoMdArrowBack} from "react-icons/io";
 import {useNavigate} from "react-router-dom";
 import stringToImageArray from "../../util/base64ToImage.tsx";
-import {ReviewRequest} from "../../common/type.tsx";
+import {ReviewRequest} from "../../common/types/reviewType.tsx";
 import ReviewWriteTitle from "../../components/review/ReviewWriteTitle.tsx";
 import ReviewWriteTag from "../../components/review/ReviewWriteTag.tsx";
 import ReviewWriteContent from "../../components/review/ReviewWriteContent.tsx";
@@ -53,7 +53,7 @@ function WritePage() {
 
             if (response.status === 201) {
                 alert('작성 완료되었습니다')
-                location.href = '/'
+                navigate('/')
             } else {
                 alert('문제가 발생했습니다 다시 시도해주세요')
             }

@@ -26,9 +26,9 @@ function Header() {
                     <IoIosSearch className="text-2xl m-auto"/>
                 </Link>
 
-                {loginState.isLogin ?
+                {!loginState.isLogin ?
                     <Link to={'/review/write'}
-                        className="w-24 h-8 mx-2 content-center border border-black rounded-3xl font-medium ease-in hover:bg-black hover:text-white transition-colors">
+                        className="w-24 h-8 mx-2 content-center text-center border border-black rounded-3xl font-medium ease-in hover:bg-black hover:text-white transition-colors">
                         새 글 작성
                     </Link>
                     : <></>}

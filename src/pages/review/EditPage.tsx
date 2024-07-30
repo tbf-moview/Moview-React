@@ -42,7 +42,6 @@ function EditPage() {
     }
 
     const handleSubmit = async () => {
-        const navigate = useNavigate()
 
         const {imageArray, contentArray} = await stringToImageArray(content)
         const reviewRequest: ReviewRequest = {

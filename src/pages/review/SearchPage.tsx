@@ -1,18 +1,50 @@
 import BasicLayout from "../../layout/BasicLayout.tsx";
 import {IoIosSearch} from "react-icons/io";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Review} from "../../common/types/reviewType.tsx";
 import SearchReviewComponent from "../../components/review/SearchReviewComponent.tsx";
-import {reviewData} from "../../common/testData.tsx";
 import {useSearchParams} from "react-router-dom";
+import {getSearchReview} from "../../api/reviewApi.tsx";
+import useInfiniteScroll from "../../util/useInfiniteScroll.tsx";
+import Loading from "../../components/common/Loading.tsx";
 
 function SearchPage() {
 
+    const [reviewData, setReviewData] = useState<Review[]>([]);
     const [searchParams, setSearchParams] = useSearchParams()
     const [searchFocus, setSearchFocus] = useState(false);
 
+    const target = useRef<HTMLDivElement>(null)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+    let {page} = useInfiniteScroll({
+        target: target,
+        targetArray: reviewData,
+        threshold: 0.2,
+        endPoint: 2,
+    })
+
+    useEffect(() => {
+        setIsLoading(true);
+
+        getSearchReview(searchParams.toString(), "title", "like", page).then((data) => {
+            setReviewData([...reviewData, ...data]);
+        })
+
+        setIsLoading(false)
+    }, [page]);
+
     const handleSearchParam = (paramStr: string) => {
-        setSearchParams({"param" : paramStr});
+        setSearchParams({"param": paramStr});
+
+
+        setIsLoading(true);
+        page = 0;
+
+        getSearchReview(paramStr, "title", "like", page).then((data) => {
+            setReviewData([...reviewData, ...data]);
+        })
+
+        setIsLoading(false);
     }
 
 
@@ -33,6 +65,8 @@ function SearchPage() {
                 {searchParams.get("param") && <div>
                     {reviewData.map((review: Review) => SearchReviewComponent(review))}
                 </div>}
+
+                {isLoading && <div>{Loading}</div>}
 
             </div>
         </BasicLayout>

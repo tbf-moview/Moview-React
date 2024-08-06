@@ -1,16 +1,22 @@
 import {ReactNode, useEffect} from 'react';
 import Header from "../components/common/Header.tsx";
 import {sendCookie} from "../api/loginApi.tsx";
-import {useDispatch} from "react-redux";
-import {login} from "../slices/loginSlice.tsx";
+import {useNavigate} from "react-router-dom";
+import {useLoginStore} from "../store.tsx";
 
 function BasicLayout({bgColor, children}: { bgColor: string, children: ReactNode }) {
 
-    const dispatch = useDispatch();
+    const { isLogin, setIsLogin } = useLoginStore();
+
+    const navigate = useNavigate()
 
     useEffect(() => {
-        sendCookie().then(() => {
-            dispatch(login(true))
+        sendCookie().then((res) => {
+            if (res.data != 'Email verified successfully') {
+                setIsLogin(false);
+            }
+
+            setIsLogin(false);
         }).catch(() => {
         })
     })
@@ -18,7 +24,7 @@ function BasicLayout({bgColor, children}: { bgColor: string, children: ReactNode
     return (
         <main className={"w-screen h-auto " + bgColor}>
             <div className="max-w-screen-lg 2xl:max-w-screen-xl mx-auto">
-                <Header/>
+                <Header isLogin={isLogin}/>
                 {children}
             </div>
         </main>

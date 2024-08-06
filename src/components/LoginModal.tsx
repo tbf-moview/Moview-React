@@ -1,4 +1,4 @@
-import {emailLogin, emailSignup, moveGoogleLogin, moveKakaoLogin, moveNaverLogin} from "../api/loginApi.tsx";
+import {emailLogin, emailSignup, moveKakaoLogin} from "../api/loginApi.tsx";
 import {useState} from "react";
 
 function LoginModal({showModal, setShowModal}:
@@ -59,12 +59,14 @@ function LoginModal({showModal, setShowModal}:
                                  }}/>
                             <img className="w-12" src="/naver_btnG_circle.png" alt="kakao-login" onClick={(e) => {
                                 e.stopPropagation()
-                                moveNaverLogin()
+                                alert("준비중입니다")
+                                // moveNaverLogin()
                             }}/>
                             <img className="w-12" src="/google_web_light_rd_na@4x.png" alt="kakao-login"
                                  onClick={(e) => {
                                      e.stopPropagation()
-                                     moveGoogleLogin()
+                                     alert("준비중입니다")
+                                     // moveGoogleLogin()
                                  }}/>
                         </div>
                     </div>

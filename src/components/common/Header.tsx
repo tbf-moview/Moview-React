@@ -2,13 +2,10 @@ import LoginModal from "../LoginModal.tsx";
 import {IoIosSearch} from "react-icons/io";
 import {useState} from "react";
 import {MdArrowDropDown} from "react-icons/md";
-import {useSelector} from "react-redux";
-import {IRootState} from "../../store.tsx";
 import {Link} from "react-router-dom";
 
-function Header() {
+function Header({isLogin}: { isLogin: boolean }) {
 
-    const loginState = useSelector((state: IRootState) => state.loginSlice)
 
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
@@ -17,18 +14,18 @@ function Header() {
     return (
         <header
             className="flex flex-row justify-between max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 py-3">
-            <Link to={'/'} className="text-xl">
-                Moview
+            <Link to={'/'} className="w-20 content-center">
+                <img src={"/moview_logo.png"} alt="logo"/>
             </Link>
-            <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-row items-center">
 
                 <Link to={'/review/search'} className="ml-1 w-10 h-10 content-center hover:bg-gray-200 rounded-full">
                     <IoIosSearch className="text-2xl m-auto"/>
                 </Link>
 
-                {!loginState.isLogin ?
+                {!isLogin ?
                     <Link to={'/review/write'}
-                        className="w-24 h-8 mx-2 content-center text-center border border-black rounded-3xl font-medium ease-in hover:bg-black hover:text-white transition-colors">
+                          className="w-24 h-8 mx-2 content-center text-center border border-black rounded-3xl font-medium ease-in hover:bg-black hover:text-white transition-colors">
                         새 글 작성
                     </Link>
                     : <></>}
@@ -36,7 +33,7 @@ function Header() {
 
                 <div className="ml-2 w-18 h-10 flex items-center justify-center">
 
-                    {loginState.isLogin ?
+                    {isLogin ?
                         <button
                             className="bg-gray-900 text-white px-4 py-1 rounded-2xl hover:bg-gray-700 transition-colors"
                             onClick={() => setShowModal(true)}
@@ -52,7 +49,7 @@ function Header() {
                         </button>}
                 </div>
 
-                {loginState.isLogin ?
+                {isLogin ?
                     <div className="relative pl-1"
                          onClick={() => setShowDropdown(!showDropdown)}>
                         <a><MdArrowDropDown className="text-2xl text-gray-500"/></a>

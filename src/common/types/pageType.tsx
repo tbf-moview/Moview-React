@@ -1,5 +1,5 @@
 import {MutableRefObject, ReactElement} from "react";
-import {ReviewIndex} from "./reviewType.tsx";
+import {Review, ReviewIndex} from "./reviewType.tsx";
 
 export interface Tab {
     id: number;
@@ -12,6 +12,6 @@ export interface InfiniteScrollProps {
     rootMargin?: string;
     target: MutableRefObject<HTMLDivElement | null>;
     threshold?: number;
-    targetArray: Array<ReviewIndex>;
+    targetArray: Array<ReviewIndex | Review>;
     endPoint?: number;
 }

@@ -1,11 +1,11 @@
-import {configureStore} from "@reduxjs/toolkit";
-import loginSlice from "./slices/loginSlice.tsx";
+import { create } from "zustand";
+import {LoginStoreType} from "./common/types/loginType.tsx";
 
-const store = configureStore({
-    reducer: {
-        'loginSlice': loginSlice
-    }
-})
+export const useLoginStore = create<LoginStoreType>((set) => ({
+    isLogin: false,
+    setIsLogin: (isLogin: boolean) => {
+        set(() => ({ isLogin: isLogin }));
+    },
+}));
 
-export default store
-export type IRootState = ReturnType<typeof store.getState>
+export default useLoginStore;

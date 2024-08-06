@@ -47,7 +47,7 @@ export const emailLogin = async (email: string) => {
 }
 
 export const emailSignup = async (email: string) => {
-    return await axios.post(API.EMAIL_LOGIN, {
+    return await axios.post(API.EMAIL_SIGNUP, {
         email: email,
     })
 }
@@ -71,5 +71,5 @@ export const SignUpCallBack = () => {
 }
 
 export const sendCookie = async () => {
-    return await axiosCookie.get(`${API.BASE_URL}/token`)
+    return await axiosCookie.get(`${API.BASE_URL}/login/verify`)
 }

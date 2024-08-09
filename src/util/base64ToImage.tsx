@@ -8,10 +8,11 @@ export default async function stringToImageArray(content: string) {
     const imageArray = new Array<File>()
     const contentArray = new Array<string>()
 
-    const parts = content.split(/(<img[^>]*>)/);
+    const parts = content.split(/(<img src="data:image[^>]*>)/);
 
     for (let i = 0; i < parts.length; i++) {
-        if (parts[i].startsWith("<img")) {
+        if (parts[i].startsWith("<img src=\"data:image")) {
+            console.log(parts[i]);
             const srcMatch = parts[i].match(/src="([^"]*)"/);
 
             if (srcMatch && srcMatch[1]) {

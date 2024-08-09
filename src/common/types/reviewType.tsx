@@ -1,10 +1,3 @@
-import {MutableRefObject} from "react";
-
-export interface Tab {
-    id: number;
-    label: Element;
-    content: string;
-}
 
 export interface ReviewRequest {
     title: string;
@@ -14,18 +7,19 @@ export interface ReviewRequest {
 }
 
 export interface Review {
-    id: number;
+    id: string;
     title: string;
     content: string;
     member: Member;
     likeCount: number;
+    likeSign: boolean;
     reviewTags: ReviewTag[];
     createDate: Date;
     updateDate: Date;
 }
 
 export interface ReviewIndex {
-    id: number;
+    id: string;
     title: string;
     content: string;
     email: string;
@@ -33,11 +27,6 @@ export interface ReviewIndex {
     likeCount: number;
     createDate: Date;
     updateDate: Date;
-}
-
-interface Member {
-    email: string;
-    nickname: string;
 }
 
 export interface ReviewTag {
@@ -45,11 +34,7 @@ export interface ReviewTag {
     tag: string;
 }
 
-export interface InfiniteScrollProps {
-    root?: Element | null;
-    rootMargin?: string;
-    target: MutableRefObject<HTMLDivElement | null>;
-    threshold?: number;
-    targetArray: Array<ReviewIndex>;
-    endPoint?: number;
+interface Member {
+    email: string;
+    nickname: string;
 }

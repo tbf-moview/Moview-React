@@ -1,18 +1,56 @@
 import BasicLayout from "../../layout/BasicLayout.tsx";
 import {IoIosSearch} from "react-icons/io";
-import {useState} from "react";
-import {Review} from "../../common/type.tsx";
+import {useCallback, useEffect, useRef, useState} from "react";
+import {Review} from "../../common/types/reviewType.tsx";
 import SearchReviewComponent from "../../components/review/SearchReviewComponent.tsx";
-import {reviewData} from "../../common/testData.tsx";
 import {useSearchParams} from "react-router-dom";
+import {getSearchReview} from "../../api/reviewApi.tsx";
+import useInfiniteScroll from "../../util/useInfiniteScroll.tsx";
+import Loading from "../../components/common/Loading.tsx";
+import {debounce} from "lodash";
 
 function SearchPage() {
 
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [reviewData, setReviewData] = useState<Review[]>([]);
+    const [searchParams, setSearchParams] = useSearchParams({"param": ""})
     const [searchFocus, setSearchFocus] = useState(false);
 
+    const target = useRef<HTMLDivElement>(null)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    let {page} = useInfiniteScroll({
+        target: target,
+        targetArray: reviewData,
+        threshold: 0.2,
+        endPoint: 2,
+    })
+
+    // useEffect(() => {
+    //     setIsLoading(true);
+    //
+    //     getSearchReview(searchParams.toString(), "title", "like", page).then((data) => {
+    //         setReviewData([...reviewData, ...data]);
+    //     })
+    //
+    //     setIsLoading(false)
+    // }, [page]);
+
+    const sendQuery = (query: string) => {
+        console.log("delay")
+        getSearchReview(query, "title", "like", page)
+            .then((data) => setReviewData([...reviewData, ...data]));
+    }
+
+    const delayedSearch = useCallback(
+        debounce(async (query: string) =>
+            sendQuery(query), 600), []
+    )
+
     const handleSearchParam = (paramStr: string) => {
-        setSearchParams({"param" : paramStr});
+        setSearchParams({"param": paramStr});
+        console.log(paramStr)
+
+        delayedSearch(paramStr);
+        console.log("delayedSearch")
     }
 
 
@@ -33,6 +71,8 @@ function SearchPage() {
                 {searchParams.get("param") && <div>
                     {reviewData.map((review: Review) => SearchReviewComponent(review))}
                 </div>}
+
+                {isLoading && <div>{Loading}</div>}
 
             </div>
         </BasicLayout>

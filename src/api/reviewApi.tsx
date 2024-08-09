@@ -19,7 +19,7 @@ export const getReview = async (id: string) => {
 
 export const getSearchReview = async (searchParams: string, searchOption: string, sortOption: string, page: number) => {
     const res = await axios.get<Review[]>(
-        `${API.BASE_URL}/reviews?searchOption=${searchOption}&searchParams=${searchParams}&sortOption=${sortOption}&page=${page}`,
+        `${API.BASE_URL}/reviews/search?searchOption=${searchOption}&searchParams=${searchParams}&sortOption=${sortOption}&page=${page}`,
     );
     return res.data;
 }

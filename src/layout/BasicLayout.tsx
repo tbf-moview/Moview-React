@@ -6,20 +6,7 @@ import {useLoginStore} from "../store.tsx";
 
 function BasicLayout({bgColor, children}: { bgColor: string, children: ReactNode }) {
 
-    const { isLogin, setIsLogin } = useLoginStore();
-
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        sendCookie().then((res) => {
-            if (res.data != 'Email verified successfully') {
-                setIsLogin(false);
-            }
-
-            setIsLogin(false);
-        }).catch(() => {
-        })
-    })
+    const {isLogin, setIsLogin} = useLoginStore();
 
     return (
         <main className={"w-screen h-auto " + bgColor}>

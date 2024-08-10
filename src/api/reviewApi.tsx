@@ -1,9 +1,9 @@
 import axios from "axios";
-import API from "../styles/config.tsx";
 import {Review, ReviewIndex, ReviewRequest} from "../common/types/reviewType.tsx";
 import {getReviewFormData} from "../util/reviewParser.tsx";
+import API from "../styles/config.tsx";
 
-export const getIndexReview = async (page: number, sortOption: string) => {
+export const getIndexReview = async (sortOption: string, page: number) => {
     const res = await axios.get<ReviewIndex[]>(
         `${API.BASE_URL}/reviews?sortOption=${sortOption}&page=${page}`,
     );
@@ -17,9 +17,9 @@ export const getReview = async (id: string) => {
     return res.data;
 }
 
-export const getSearchReview = async (searchParams: string, searchOption: string, sortOption: string, page: number) => {
-    const res = await axios.get<Review[]>(
-        `${API.BASE_URL}/reviews/search?searchOption=${searchOption}&searchParams=${searchParams}&sortOption=${sortOption}&page=${page}`,
+export const getSearchReview = async (searchWord: string, searchOption: string, sortOption: string, page: number) => {
+    const res = await axios.get<ReviewIndex[]>(
+        `${API.BASE_URL}/reviews/search?searchOption=${searchOption}&searchWord=${searchWord}&sortOption=${sortOption}&page=${page}`,
     );
     return res.data;
 }

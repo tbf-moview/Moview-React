@@ -1,12 +1,11 @@
 import {Editor} from "@tinymce/tinymce-react";
-import API from "../../styles/config.tsx";
 
 function ReviewWriteContent({content, setContent}: {content: string, setContent: (content: string) => void }) {
 
     return (
         <div className="h-[calc(100%-248px)] absolutebottom-16 z-0">
             <Editor
-                apiKey={API.TINYMCE_API_KEY}
+                apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
                 init={{
                     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
                     autoresize: false,

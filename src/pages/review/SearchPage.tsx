@@ -1,56 +1,49 @@
 import BasicLayout from "../../layout/BasicLayout.tsx";
 import {IoIosSearch} from "react-icons/io";
-import {useCallback, useEffect, useRef, useState} from "react";
-import {Review} from "../../common/types/reviewType.tsx";
+import {useCallback, useEffect, useState} from "react";
+import {ReviewIndex} from "../../common/types/reviewType.tsx";
 import SearchReviewComponent from "../../components/review/SearchReviewComponent.tsx";
 import {useSearchParams} from "react-router-dom";
 import {getSearchReview} from "../../api/reviewApi.tsx";
-import useInfiniteScroll from "../../util/useInfiniteScroll.tsx";
-import Loading from "../../components/common/Loading.tsx";
 import {debounce} from "lodash";
+import Loading from "../../components/common/Loading.tsx";
 
 function SearchPage() {
 
-    const [reviewData, setReviewData] = useState<Review[]>([]);
+    const [reviewData, setReviewData] = useState<ReviewIndex[]>([]);
     const [searchParams, setSearchParams] = useSearchParams({"param": ""})
     const [searchFocus, setSearchFocus] = useState(false);
 
-    const target = useRef<HTMLDivElement>(null)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    let {page} = useInfiniteScroll({
-        target: target,
-        targetArray: reviewData,
-        threshold: 0.2,
-        endPoint: 2,
-    })
+    const [isLoading, setIsLoading] = useState(false);
 
-    // useEffect(() => {
-    //     setIsLoading(true);
-    //
-    //     getSearchReview(searchParams.toString(), "title", "like", page).then((data) => {
-    //         setReviewData([...reviewData, ...data]);
-    //     })
-    //
-    //     setIsLoading(false)
-    // }, [page]);
+    useEffect(() => {
+        setIsLoading(true);
+
+        getSearchReview("", "title", "like", 1)
+            .then((data) => {
+                setReviewData([...reviewData, ...data]);
+            })
+
+        setIsLoading(false)
+    }, []);
 
     const sendQuery = (query: string) => {
-        console.log("delay")
-        getSearchReview(query, "title", "like", page)
-            .then((data) => setReviewData([...reviewData, ...data]));
+        getSearchReview(query, "title", "like", 1)
+            .then((data) => {
+                console.log(data);
+                setReviewData([...reviewData, ...data])
+            });
     }
 
     const delayedSearch = useCallback(
         debounce(async (query: string) =>
-            sendQuery(query), 600), []
+            sendQuery(query), 500), []
     )
 
     const handleSearchParam = (paramStr: string) => {
         setSearchParams({"param": paramStr});
-        console.log(paramStr)
 
         delayedSearch(paramStr);
-        console.log("delayedSearch")
     }
 
 
@@ -68,13 +61,13 @@ function SearchPage() {
                            onFocus={() => setSearchFocus(true)}
                            onBlur={() => setSearchFocus(false)}/>
                 </div>
-                {searchParams.get("param") && <div>
-                    {reviewData.map((review: Review) => SearchReviewComponent(review))}
-                </div>}
-
-                {isLoading && <div>{Loading}</div>}
+                <div>
+                    {reviewData.map((review: ReviewIndex) => SearchReviewComponent(review))}
+                </div>
 
             </div>
+
+            {isLoading && <div>{Loading}</div>}
         </BasicLayout>
     );
 }

@@ -71,5 +71,5 @@ export const SignUpCallBack = () => {
 }
 
 export const sendCookie = async () => {
-    return await axiosCookie.get(`${API.BASE_URL}/login/verify`)
+    return await axiosCookie.get(`${import.meta.env.VITE_BASE_URL}/login/verify`)
 }

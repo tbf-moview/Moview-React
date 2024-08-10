@@ -31,6 +31,7 @@ function IndexTab() {
     }
 
     useEffect(() => {
+        console.log(page)
         setIsLoading(true);
         const sortOption = (activeTabIndex === 1) ? "like" : "create";
 

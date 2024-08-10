@@ -41,7 +41,7 @@ export const postEditReview = async (id: string, reviewRequest: ReviewRequest) =
 }
 
 export const likeReview = async (id: string) => {
-    return await axios.put(
+    return await axios.post(
         `${API.BASE_URL}/review/${id}/like`
     );
 }

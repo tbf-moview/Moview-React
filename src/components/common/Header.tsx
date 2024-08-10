@@ -47,7 +47,7 @@ function Header() {
                      onClick={() => setShowDropdown(!showDropdown)}>
                     <a><MdArrowDropDown className="text-2xl text-gray-500"/></a>
                     {showDropdown &&
-                        <ul className="absolute z-10 h-auto top-12 right-0 bg-white w-48 shadow">
+                        <ul className="absolute z-20 h-auto top-12 right-0 bg-white w-48 shadow">
                             <li className="px-4 py-3 text-xl text-gray-700 hover:bg-gray-50 hover:text-emerald-500">
                                 <Link to={'/review/my'} className="block text-base cursor-pointer">내 리뷰</Link>
                             </li>

@@ -30,7 +30,6 @@ function SearchPage() {
     })
 
     useEffect(() => {
-        console.log(page)
         delayedSearch(page, reviewData)
     }, [page]);
 
@@ -48,9 +47,6 @@ function SearchPage() {
                     searchSort,
                     pageNum)
                     .then((data) => {
-                        console.log(data)
-                        console.log(pageNum)
-                        console.log("reviews : " + reviews.length)
                         if (pageNum === 1) {
                             setReviewData([...data])
                         } else {

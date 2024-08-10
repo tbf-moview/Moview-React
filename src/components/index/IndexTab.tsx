@@ -26,15 +26,31 @@ function IndexTab() {
         endPoint: 2,
     })
 
+    const setPage = (pageNum: number) => {
+        page = pageNum
+    }
+
     useEffect(() => {
+        console.log(page)
         setIsLoading(true);
         const sortOption = (activeTabIndex === 1) ? "like" : "create";
 
-        getIndexReview(page, sortOption).then((data) => {
+        getIndexReview(sortOption, page).then((data) => {
             setReviewData([...reviewData, ...data]);
             setIsLoading(false)
         })
     }, [page]);
+
+    useEffect(() => {
+        setIsLoading(true);
+        const sortOption = (activeTabIndex === 1) ? "like" : "create";
+
+        getIndexReview(sortOption, 1).then((data) => {
+            setPage(1);
+            setReviewData([...data]);
+            setIsLoading(false)
+        })
+    }, [activeTabIndex]);
 
     const tabs: Tab[] = [
         {id: 1, label: <><PiTrendUpFill className="mr-2"/>트렌딩</>, content: reviewData},
@@ -42,11 +58,11 @@ function IndexTab() {
     ];
 
     const handleTabClick = (id: number) => {
-        page = 1;
         const sortOption = (id === 1) ? "like" : "create";
         setActiveTabIndex(id);
 
-        getIndexReview(page, sortOption).then((data) => {
+        getIndexReview(sortOption, page).then((data) => {
+            setPage(1)
             setReviewData([...data])
             setIsLoading(false)
         });

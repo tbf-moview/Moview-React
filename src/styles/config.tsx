@@ -20,7 +20,7 @@ const API = {
     REVIEW: `${BASE_URL}/review`,
     UPLOAD_IMAGE: `${BASE_URL}/image`,
 
-    KAKAO_LOGIN: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${import.meta.env.VITE_KAKAO_CLIENT_SECRET_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}`,
+    KAKAO_LOGIN: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${import.meta.env.VITE_KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}`,
     KAKAO_LOGIN_AUTH: `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${import.meta.env.VITE_KAKAO_REST_API_KEY}&redirect_url=${KAKAO_REDIRECT_URI}&client_secret=${import.meta.env.VITE_KAKAO_CLIENT_SECRET_KEY}`,
     KAKAO_REDIRECT_PATH: KAKAO_REDIRECT_PATH,
 

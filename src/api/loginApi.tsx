@@ -70,6 +70,6 @@ export const SignUpCallBack = () => {
     return <></>
 }
 
-export const sendCookie = async () => {
-    return await axiosCookie.get(`${import.meta.env.VITE_BASE_URL}/login/verify`)
+export const checkToken = async () => {
+    return await axiosCookie.get(`${API.BASE_URL}/token/auth`)
 }

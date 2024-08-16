@@ -1,11 +1,11 @@
 
 // development
-const BASE_URL = "http://localhost:8080/api"
-const BASE_FRONT_URL = "http://localhost:5173"
-
-// deploy
 // const BASE_URL = "http://localhost:8080/api"
 // const BASE_FRONT_URL = "http://localhost:5173"
+
+// deploy
+const BASE_URL = "http://43.202.121.159:8080/api"
+const BASE_FRONT_URL = "https://moview-react.vercel.app"
 
 const KAKAO_REDIRECT_PATH = "/login/kakao"
 const KAKAO_REDIRECT_URI = `${BASE_FRONT_URL}${KAKAO_REDIRECT_PATH}`

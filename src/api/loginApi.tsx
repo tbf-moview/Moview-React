@@ -71,5 +71,5 @@ export const SignUpCallBack = () => {
 }
 
 export const checkToken = async () => {
-    return await axiosCookie.get(`${API.BASE_URL}/token/auth`)
+    return await axiosCookie.get(`${API.BASE_URL}/token`)
 }

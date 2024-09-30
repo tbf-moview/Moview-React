@@ -2,6 +2,7 @@ import axios from "axios";
 import {Review, ReviewIndex, ReviewRequest} from "../common/types/reviewType.tsx";
 import {getReviewFormData} from "../util/reviewParser.tsx";
 import API from "../styles/config.tsx";
+import axiosCookie from "../common/axiosCookie.tsx";
 
 export const getIndexReview = async (sortOption: string, page: number) => {
     const res = await axios.get<ReviewIndex[]>(
@@ -26,22 +27,23 @@ export const getSearchReview = async (searchWord: string, searchOption: string, 
 
 export const postReview = async (reviewRequest: ReviewRequest) => {
     const formData = getReviewFormData(reviewRequest);
-    return await axios.post(
+    return await axiosCookie.post(
         `${API.BASE_URL}/review`,
         formData,
+        {withCredentials: true}
     );
 }
 
 export const postEditReview = async (id: string, reviewRequest: ReviewRequest) => {
     const formData = getReviewFormData(reviewRequest);
-    return await axios.put(
+    return await axiosCookie.put(
         `${API.BASE_URL}/review/${id}`,
         formData,
     );
 }
 
 export const likeReview = async (id: string) => {
-    return await axios.post(
+    return await axiosCookie.post(
         `${API.BASE_URL}/review/${id}/like`
     );
 }

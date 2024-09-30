@@ -1,11 +1,11 @@
 
 // development
-// const BASE_URL = "http://localhost:8080/api"
-// const BASE_FRONT_URL = "http://localhost:5173"
+const BASE_URL = "http://localhost:8080/api"
+const BASE_FRONT_URL = "http://localhost:5173"
 
 // deploy
-const BASE_URL = "http://43.202.121.159:8080/api"
-const BASE_FRONT_URL = "https://moview-react.vercel.app"
+// const BASE_URL = "http://43.202.121.159:8080/api"
+// const BASE_FRONT_URL = "https://moview-react.vercel.app"
 
 const KAKAO_REDIRECT_PATH = "/login/kakao"
 const KAKAO_REDIRECT_URI = `${BASE_FRONT_URL}${KAKAO_REDIRECT_PATH}`
@@ -26,7 +26,7 @@ const API = {
 
     NAVER_LOGIN: "naver_login_url",
 
-    GOOGLE_LOGIN: "google_login_url",
+    GOOGLE_LOGIN: `http://localhost:8080/oauth2/authorization/google`,
 
     EMAIL_LOGIN: `${BASE_URL}/login/moview`,
     EMAIL_SIGNUP: `${BASE_URL}/signup/moview`,

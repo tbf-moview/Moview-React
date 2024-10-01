@@ -46,7 +46,6 @@ function WritePage() {
             texts: contentArray,
             images: imageArray
         }
-        console.log(reviewRequest);
 
         try {
             const response = await postReview(reviewRequest)

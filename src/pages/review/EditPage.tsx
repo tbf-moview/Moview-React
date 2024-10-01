@@ -78,7 +78,6 @@ function EditPage() {
             tagArray.sort();
             setTag(tagArray);
 
-            console.log(review.content);
             setContent(review.content);
 
         })

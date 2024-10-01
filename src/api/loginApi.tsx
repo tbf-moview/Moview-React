@@ -65,11 +65,15 @@ export const SignUpCallBack = () => {
     }).catch(() => {
         alert("오류가 발생했습니다. 나중에 다시 시도해 주세요")
         navigate({pathname: '/'}, {replace: true})
-    })
+    });
 
-    return <></>
+    return <></>;
+}
+
+export const logout = async () => {
+    return await axios.delete(`${API.BASE_URL}/token/logout`);
 }
 
 export const checkToken = async () => {
-    return await axiosCookie.get(`${API.BASE_URL}/token`)
+    return await axiosCookie.get(`${API.BASE_URL}/token`);
 }

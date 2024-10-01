@@ -47,3 +47,7 @@ export const likeReview = async (id: string) => {
         `${API.BASE_URL}/review/${id}/like`
     );
 }
+
+export const deleteReview = async (id: string) => {
+    return await axiosCookie.delete(`${API.BASE_URL}/review/${id}`);
+}

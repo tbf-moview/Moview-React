@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {getReview, postEditReview} from "../../api/reviewApi.tsx";
+import {deleteReview, getReview, postEditReview} from "../../api/reviewApi.tsx";
 import {IoMdArrowBack} from "react-icons/io";
 import {useNavigate, useParams} from "react-router-dom";
 import stringToImageArray from "../../util/base64ToImage.tsx";
@@ -38,6 +38,17 @@ function EditPage() {
     const removeTag = (tagInputValue: string | null) => {
         if (tagInputValue != null) {
             setTag(tag.filter(t => t != tagInputValue));
+        }
+    }
+
+    const handleDelete = async () => {
+        if (!confirm("리뷰를 정말 삭제하시겠습니까?")) return;
+
+        const response = await deleteReview(reviewId);
+
+        if (response.status === 200) {
+            alert('삭제 완료되었습니다')
+            navigate({pathname: '/'}, {replace: true})
         }
     }
 
@@ -97,9 +108,18 @@ function EditPage() {
                         onClick={() => navigate(-1)}>
                     <IoMdArrowBack className="ml-8 mr-2"/>나가기
                 </button>
-                <button className="bg-teal-500 text-white font-semibold mx-4 my-2 px-4 py-2 rounded-md"
-                        onClick={handleSubmit}>수정하기
-                </button>
+                <div>
+                    <button
+                        className="bg-red-500 text-white font-semibold mx-4 my-2 px-4 py-2 rounded-md"
+                        onClick={handleDelete}>
+                        삭제하기
+                    </button>
+                    <button
+                        className="bg-teal-500 text-white font-semibold mx-4 my-2 px-4 py-2 rounded-md"
+                        onClick={handleSubmit}>
+                        수정하기
+                    </button>
+                </div>
             </div>
         </div>
     )
